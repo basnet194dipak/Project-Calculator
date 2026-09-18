@@ -1,31 +1,109 @@
 body {
     display: flex;
     align-items: center;
+    justify-content: center;
+    height: 100vh;
 }
 
 .calculator {
-    height: 60vh;
-    width: 100vw;
+    height: 70vh;
+    width: 60vw;
     display: flex;
     flex-direction: column;
     padding: 20px;
     border: 2px solid green;
-
+    border-radius: 20px;
+    background-color: blueviolet;
 }
 
 .screen {
-    width: 50vw;
     height: 20%;
     border: 2px solid black;
     margin-bottom: 10px;
+    border-radius: 20px;
+    background-color: white;
+    text-align: center;
+    font-size: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .buttons {
     display: flex;
+    flex: 1;
 }
 
 .operations {
     margin-left: 4%;
     display: flex;
-    /* justify-content: space-n; */
+    flex: 1;
+    background-color: bisque;
+    border-radius: 20px;
+    padding: 6%;
+    flex-direction: column;
+}
+
+.signs {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
+.numbers {
+    display: flex;
+    flex: 1;
+    flex-wrap: wrap;
+    background-color: aqua;
+    border-radius: 20px;
+    justify-content: center;
+
+}
+
+button {
+    flex: 1;
+    min-height: 45px;
+
+    margin: 6px;
+    padding: 8px;
+
+    border: none;
+    border-radius: 12px;
+
+    background-color: white;
+    color: #333;
+
+    font-size: 22px;
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+
+.numbers button {
+    flex: 0 0 28%;
+}
+
+.signs button:hover {
+    background-color: #ffb866;
+}
+
+.equals button {
+    background-color: #2ecc71;
+    color: white;
+}
+
+.clear button {
+    background-color: #e74c3c;
+    color: white;
+}
+
+.equals,
+.clear {
+    display: flex;
+}
+
+.equals button,
+.clear button {
+    flex: 1;
 }
