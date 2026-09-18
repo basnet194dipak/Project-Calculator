@@ -1,0 +1,31 @@
+body {
+    display: flex;
+    align-items: center;
+}
+
+.calculator {
+    height: 60vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    border: 2px solid green;
+
+}
+
+.screen {
+    width: 50vw;
+    height: 20%;
+    border: 2px solid black;
+    margin-bottom: 10px;
+}
+
+.buttons {
+    display: flex;
+}
+
+.operations {
+    margin-left: 4%;
+    display: flex;
+    /* justify-content: space-n; */
+}

@@ -42,6 +42,15 @@ function toggle() {
     }
 }
 
+function dual() {
+    if (first_number != "" && second_number != "") {
+        return true
+    }
+    else {
+        return false
+    }
+}
+
 function displays(first_number, operation, second_number) {
     return first_number + operation + second_number
 }
@@ -91,9 +100,7 @@ clear.addEventListener("click", () => {
     Screen_display(display)
 })
 
-
-let equals = document.querySelector(".equals")
-equals.addEventListener("click", () => {
+function util() {
     // get the final results
     display = result(first_number, operation, second_number)
     Screen_display(display)
@@ -103,7 +110,12 @@ equals.addEventListener("click", () => {
     first_number = display
     // reset the second number to empty
     second_number = ""
+}
 
+let equals = document.querySelector(".equals")
+equals.addEventListener("click", () => {
+
+    util()
 })
 
 function event_operations(sign) {
@@ -116,20 +128,32 @@ function event_operations(sign) {
 
 let adds = document.querySelector("#add")
 adds.addEventListener("click", () => {
+    if (dual()) {
+        util()
+    }
     event_operations("+")
 })
 
 let subtracts = document.querySelector("#subtract")
 subtracts.addEventListener("click", () => {
+    if (dual()) {
+        util()
+    }
     event_operations("-")
 })
 
 let multiplies = document.querySelector("#multiply")
 multiplies.addEventListener("click", () => {
+    if (dual()) {
+        util()
+    }
     event_operations("*")
 })
 
 let divides = document.querySelector("#divide")
 divides.addEventListener("click", () => {
+    if (dual()) {
+        util()
+    }
     event_operations("/")
 })
