@@ -36,7 +36,7 @@ function operate(a, sign, b) {
     }
 
     return typeof answer === "number" && Number.isFinite(answer)
-        ? answer
+        ? answer.toFixed(2)
         : "Error";
 }
 
