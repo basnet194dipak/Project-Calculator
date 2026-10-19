@@ -15,7 +15,8 @@ function divide(a, b) {
     {
         return a / b
     }
-    
+    // alert("any number divisible by zero is undefined")
+    return "number cannot be divided by zero"
 }
 
 
@@ -27,7 +28,16 @@ let operations = {
 }
 
 function operate(a, sign, b) {
-    return operations[sign](a, b)
+    var answer = operations[sign](a, b)
+    
+    if (typeof answer === "string")
+    {
+        return answer
+    }
+
+    return typeof answer === "number" && Number.isFinite(answer)
+        ? answer
+        : "Error";
 }
 
 let first_number = ""
