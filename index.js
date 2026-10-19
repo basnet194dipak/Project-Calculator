@@ -28,16 +28,19 @@ let operations = {
 }
 
 function operate(a, sign, b) {
-    var answer = operations[sign](a, b)
-    
-    if (typeof answer === "string")
-    {
-        return answer
+    if (!operations[sign]) {
+        return "Error";
     }
 
-    return typeof answer === "number" && Number.isFinite(answer)
-        ? answer.toFixed(2)
-        : "Error";
+    const answer = operations[sign](a, b)
+    
+    if (typeof answer != "number" ||  !Number.isFinite(answer))
+    {
+       return typeof answer === "string" ? answer : "Error";
+    }
+
+    // Round long decimals without forcing unnecessary trailing zeros.
+    return Number(answer.toFixed(8));
 }
 
 let first_number = ""
@@ -45,6 +48,7 @@ let operation = ""
 let second_number = ""
 
 let first_store = true
+let result_shown = false;
 let display
 
 function toggle() {
@@ -87,6 +91,13 @@ document.addEventListener("DOMContentLoaded", () => {
         buttons.value = i
         buttons.innerText = i
         buttons.addEventListener("click", (e) => {
+            if (result_shown) {
+    first_number = "";
+    operation = "";
+    second_number = "";
+    first_store = true;
+    result_shown = false;
+}
             // console.log(e.target.value)
             if (first_store == true) {
                 first_number = first_number + e.target.value
@@ -112,19 +123,33 @@ clear.addEventListener("click", () => {
     operation = ""
     second_number = ""
     first_store = true
+    result_shown = false;
     Screen_display(display)
 })
 
 function util() {
-    // get the final results
-    display = result(first_number, operation, second_number)
-    Screen_display(display)
-    // switch back to storing in first number
-    toggle()
-    // store the result in first number
-    first_number = display
-    // reset the second number to empty
-    second_number = ""
+    if (!dual() || operation === "") {
+        return;
+    }
+
+    display = result(first_number, operation, second_number);
+    Screen_display(display);
+
+    // Keep an error message from becoming the next number.
+    if (typeof display !== "number") {
+        first_number = "";
+        second_number = "";
+        operation = "";
+        first_store = true;
+        return;
+    }
+
+    // Store the result for a possible next operation.
+    first_number = String(display);
+    second_number = "";
+    operation = "";
+    first_store = true;
+    result_shown = true;
 }
 
 let equals = document.querySelector(".equals")
@@ -134,11 +159,20 @@ equals.addEventListener("click", () => {
 })
 
 function event_operations(sign) {
-    toggle()
-    operation = sign
-    display = displays(first_number, operation, second_number)
-    // console.log(first_number, operations, second_number, first_store)
-    Screen_display(display)
+    if (first_number === "") {
+        return;
+    }
+
+    if (dual()) {
+        util();
+    }
+
+    result_shown = false;
+    operation = sign;
+    first_store = false;
+
+    display = displays(first_number, operation, second_number);
+    Screen_display(display);
 }
 
 let adds = document.querySelector("#add")
