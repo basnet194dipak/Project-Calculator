@@ -11,7 +11,11 @@ function multiply(a, b) {
 }
 
 function divide(a, b) {
-    return a / b
+    if (b!=0)
+    {
+        return a / b
+    }
+    
 }
 
 
@@ -97,6 +101,7 @@ clear.addEventListener("click", () => {
     first_number = ""
     operation = ""
     second_number = ""
+    first_store = true
     Screen_display(display)
 })
 
